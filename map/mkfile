@@ -4,7 +4,7 @@ MKSHELL=$PLAN9/bin/rc
 
 <../mkconfig
 
-CFLAGS='-g -O0 -std=c99' -I$PREFIX/include
+CFLAGS='-std=c99' -I$PREFIX/include
 LDFLAGS=-L$PREFIX/lib -lhhset -lhhash
 
 LIB=$PREFIX/lib/libhhmap.a

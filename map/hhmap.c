@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 #include <hhash.h>
 #include <hhset.h>
 #include "hhmap.h"

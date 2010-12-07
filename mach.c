@@ -8,7 +8,7 @@
 	(WORD-clz(x))
 
 #define ffs(x) \
-	(__builtin_ffs(x)-1)
+	(__builtin_ctz(x))
 
 #define get(x,i) \
 	((x)&(1<<(i)))

@@ -55,7 +55,7 @@ With integer entries these tables have the following advantages:
 .IP 1)
 Memory locality and compactness and thus cache efficiency.
 .IP 2)
-Serializability. The table is contained in the arrays
+Serialization. The table is contained in the arrays
 .I A
 and
 .I V.
@@ -90,12 +90,12 @@ and
 .I k
 is the integer logarithm in base 2 of
 .I n.
-.PP
 .I Hhashnew(n)
 allocates memory for a hash table with capacity
-.I n.
-.I Hhashfree
-frees the memory of a hash table but not its contents.
+.I n
+and
+.I hhashfree
+frees it.
 .PP
 The elements of the hash table are referenced by their hash value and
 offset. For a hash value
@@ -127,7 +127,7 @@ exists
 returns a negative value. Thus
 .I V[h+i]
 for any
-.I
+.I i
 does not necessarily have the hash value
 .I h.
 .I Hhashsucc
@@ -170,7 +170,7 @@ does nothing.
 .br
 .I 	HHash *T = hhashnew(n);
 .br
-.I 	uint x = rand()%n;
+.I 	uint x = rand();
 .br
 .I 	uint h = x%n;
 .br
