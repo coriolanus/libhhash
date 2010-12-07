@@ -1,0 +1,14 @@
+<$PLAN9/src/mkhdr
+
+MKSHELL=$PLAN9/bin/rc
+CFLAGS=-Wall -g -O0 -std=c99 -I$PREFIX/include
+LDFLAGS=-L$PREFIX/lib -lhhmap -lhhset -lhhash
+CFILES=`{ls *.c >[2] /dev/null}
+TARG=${CFILES:%.c=%}
+DIRS=`{ls -d */ >[2] /dev/null}
+
+default:V:	all
+
+<$PLAN9/src/mkdirs
+
+<$PLAN9/src/mkmany

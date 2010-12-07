@@ -1,0 +1,73 @@
+.TH HHMap 3
+.SH NAME
+hhmapput, hhmapget, hhmapdel \-
+Integer associative arrays using the Hopscotch hash tables.
+.SH SYNOPSIS
+.B #include <hhash.h>
+.br
+.B #include <hhset.h>
+.br
+.B #include <hhmap.h>
+.br
+.PP
+.B typedef unsigned short ushort;
+.PP
+.B HHSet *hhmapnew(uint n, void *hash, void *cmp);
+.br
+.B int hhmapput(HHSet *S, ushort k, ushort v);
+.br
+.B ushort hhmapget(HHSet *S, ushort k);
+.br
+.B ushort hhmapdel(HHSet *S, ushort k);
+.br
+.SH DESCRIPTION
+This implements an associative map using the Hopscotch hash tables.
+The keys and values are limited to
+.I short.
+The key-value pairs are stored in a
+.I HHSet
+by encoding the key in the first 16 bits and the value in the last 16
+bits. The value can never be zero but the key can be. The functions
+.I hhmapput, hhmapget
+and
+.I hhmapdel
+manipulate the set as an association. The memory of a set
+.I S
+can be freed by calling
+.I hhsetfree(S).
+The table
+.I A
+can be copied into a table
+.I B
+by using
+.I hhsetcopy(A,B).
+.PP
+.I Hhsetnew(n,hash,cmp)
+allocates memory for a new
+.I HHSet
+with the given hash- and comparison function. If hash function is
+.I NULL
+the default function is identity of the first 16 bits. If the
+comparison function is
+.I NULL
+the default is
+. I (ushort)x != (ushort)y.
+.PP
+.I Hhmapput(S,k,v)
+tries to insert the value
+.I v
+with the key
+.I k.
+It returns non-zero on success and zero otherwise.
+.PP
+.I Hhmapget(S,k)
+returns the value associated with the key
+.I k
+and zero if there is none.
+.PP
+.I Hhmapdel(S,k)
+removes the value associated with
+.I k
+from the table and returns the value which was stored there.
+.SH SEE ALSO
+hhash(3), hhset(3)

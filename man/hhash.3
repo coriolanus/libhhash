@@ -1,0 +1,190 @@
+.TH HHASH 3
+.SH NAME
+HHash, hashget, hashnew, hashfree, hashput, hashdel, hashsucc \-
+Hopscotch Hash Tables.
+.SH SYNOPSIS
+.B #include <hhash.h>
+.br
+.PP
+.B typedef struct HHash HHash;
+.PP
+.B struct HHash
+.br
+.B {
+.br
+.B		uint *H;
+.br
+.B		uint *V;
+.br
+.B		uint k, m, n;
+.br
+.B };
+.PP
+.B #define hashget(hhash,h,i) \\
+.br
+.B		((hhash)->V[((h)+(i))%(hhash)->n])
+.PP
+.B HHash *hhashnew(uint m);
+.br
+.B void hhashfree(HHash *T);
+.br
+.B int hhashsucc(HHash *T, uint h, uint i);
+.br
+.B int hhashput(HHash *T, uint h, uint x);
+.br
+.B void hhashdel(HHash *T, uint h, uint i);
+.br
+.SH DESCRIPTION
+Hopscotch hash table provides a simple hash table implementation that
+resolves hash collisions with linear probing from the initial hash
+entry up to
+.I log(n)
+entries ahead, where
+.I n
+is the size of the hash table.
+.PP
+Usage of this structure needs evaluating the hash values of the
+elements before insertion. The functions always treats the hash values
+.I modulo T->n.
+.PP
+These hash tables are useful when the values to be stored fit in
+.I uint.
+With larger entries you are better off using normal hash tables with
+linked list buckets, which is then fast enough and simpler to implement.
+With integer entries these tables have the following advantages:
+.IP 1)
+Memory locality and compactness and thus cache efficiency.
+.IP 2)
+Serializability. The table is contained in the arrays
+.I A
+and
+.I V.
+.IP 3)
+Concurrency by dividing the array into segments each with locks, though this has not been implemented here.
+.PP
+.I HHash
+is a stucture for the hash table, where
+.I H
+is the array of
+.I hops
+and
+.I V
+is an array containing the values stored in the
+table. Zero values are considered empty slots and thus zero cannot be
+inserted into the table. Each entry in
+.I H
+is a bitmap such that if for a hash value
+.I h
+the bit at
+.I i
+is set the element
+.I V[h+i]
+also has the same hash value. Also
+.I m
+is the number of elements stored in the table,
+.I n
+is the size of the arrays
+.I H
+and
+.I V.
+.I k
+is the integer logarithm in base 2 of
+.I n.
+.PP
+.I Hhashnew(n)
+allocates memory for a hash table with capacity
+.I n.
+.I Hhashfree
+frees the memory of a hash table but not its contents.
+.PP
+The elements of the hash table are referenced by their hash value and
+offset. For a hash value
+.I h
+the elements with this hash value have offsets
+.I 0 <= i < T->k.
+.I Hhashsucc(T,h,i)
+returns the
+.I successor
+of the element at
+.I V[h+i].
+If the element
+.I V[h+i]
+has the hash value
+.I h
+.I hhashsucc
+returns
+.I i,
+and if not it returns the next largest
+.I i < T->k
+such that
+.I V[h+i]
+has the hash value
+.I h.
+If no such
+.I i
+exists
+.I hhashsucc
+returns a negative value. Thus
+.I V[h+i]
+for any
+.I
+does not necessarily have the hash value
+.I h.
+.I Hhashsucc
+can be used for both checking if an element is contained in the table
+as well as iterating over the elements with the same hash value.
+.PP
+.I Hhashput(T,h,x)
+tries to insert the element
+.I x
+with hash value
+.I h
+into the table
+.I T.
+On successful addition it returns a non-zero value and zero otherwise.
+If an attempt to add an element is not successful the table should be
+resized,
+.I x
+is not added to the table, but some other modifications may have taken
+place. No operation has been provided here for resizing but one can
+simple allocate a new table with a larger size and copy all values from
+the current table into the new one. Note, trying to insert zero will not
+succeed. This is considered semantically correct behaviour as after the
+insertion zero will not be found from the table by
+.I hhsucc.
+.PP
+.I Hhashdel(T,h,i)
+removes the element at
+.I V[h+i]
+provided that
+.I V[h+i]
+has the hash value
+.I h
+and
+.I 0 <= i < T->k,
+if not
+.I hhashdel
+does nothing.
+.SH EXAMPLE
+.I 	uint n = 256;
+.br
+.I 	HHash *T = hhashnew(n);
+.br
+.I 	uint x = rand()%n;
+.br
+.I 	uint h = x%n;
+.br
+.I 	hhashput(T,h,x);
+.br
+.I 	uint i = hhashsucc(T,h,0);
+.br
+.I 	uint y = hhashget(T,h,i);
+.br
+.I 	hhashfree(T);
+.SH SEE ALSO
+hhset(3), hhmap(3)
+.SH REFERENCES
+.B Herlihy, Maurice and Shavit, Nir and Tzafrir, Moran;
+Hopscotch Hashing. DISC '08: Proceedings of the 22nd international
+symposium on Distributed Computing. Arcachon, France:
+Springer-Verlag, 2008. pp. 350--364.

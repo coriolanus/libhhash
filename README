@@ -1,0 +1,57 @@
+HOPSCOTCH HASH TABLE IMPLMENTATION
+
+Hash tables are very efficient for key value lookup in both speed and
+memory usage. Hopscotch hash tables also provide memory locality and
+cache efficiency by using open addressing and a special methdod of
+linear probing.
+
+We are using the following GCC builtin function to calculate a integer
+logartihm in base 2:
+
+__builtin_clz, count-leading-zeros, returns the number of leading
+0-bits in x, starting at the most significant bit position. If x is 0,
+the result is undefined.
+
+
+IMPLEMENTATIOON NOTES
+
+The neighbourhood of baskets is circular going back after the last
+element to the first using modulo arithmetics. Whereever we use a
+difference (x-y)%n, in order to keep modulo semantics using unsigned
+variables we add n: (n+x-y)%n, which is basically a nop but guarantees
+that the result of the subtraction remains positive.
+
+
+BUILDING
+
+The code relies, besides the aforementioned builtins, stdlib.h for the
+function malloc. The provided mkfile is written for Plan 9 mk which is
+provided on other platforms by the Plan 9 Ports [2]. The environment
+variables needed to install are in mkconfig. If Plan9port is available
+to get the library compiled and, optionally installed, use 'mk
+[install]'.
+
+
+TESTING
+
+Unit tests can be found from the directory ut. The associated mkfile
+is contained withing as is the documentation of them.
+
+
+DOCUMENTATION
+
+A Unix manual page is in the directory man. This also provides the
+documentation for the provided functions.
+
+
+CONTACT
+
+Jani Lahtinen <jani.lahtinen8@gmail.com>
+
+
+REFERENCES
+
+Herlihy, Maurice and Shavit, Nir and Tzafrir, Moran, Hopscotch
+Hashing. DISC '08: Proceedings of the 22nd international symposium on
+Distributed Computing. Arcachon, France:
+Springer-Verlag. pp. 350--364, 2008.

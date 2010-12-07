@@ -1,0 +1,25 @@
+MKSHELL=$PLAN9/bin/rc
+
+<$PLAN9/src/mkhdr
+
+<../mkconfig
+
+CFLAGS='-g -O0 -std=c99' -I$PREFIX/include
+LDFLAGS=-L$PREFIX/lib -lhhash
+
+LIB=$PREFIX/lib/libhhset.a
+
+OFILES=\
+	hhset.$O\
+
+CFILES=\
+	hhset.c\
+
+HFILES=\
+	hhset.h\
+
+<$PLAN9/src/mklib
+
+install:QV:	$HFILES
+	for (t in $HFILES)
+    	cp $t $PREFIX/include
