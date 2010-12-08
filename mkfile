@@ -10,19 +10,25 @@ CFLAGS='-std=c99'
 
 OFILES=\
 	hhash.$O\
+    hhset.$O\
+    hhmap.$O\
 
 CFILES=\
 	hhash.c\
 	mach.c\
+    hhset.c\
+    hhmap.c\
 
 HFILES=\
 	hhash.h\
-
-DIRS=map set
-
-<$PLAN9/src/mkdirs
+    hhset.h\
+    hhmap.h\
 
 <$PLAN9/src/mklib
+
+hhset.$O:	hhash.$O
+
+hhmap.$O:	hhset.$O
 
 install:QV:	$HFILES
 	for (t in $HFILES)
