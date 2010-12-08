@@ -3,23 +3,21 @@
 hhmapput, hhmapget, hhmapdel \-
 Integer associative arrays using the Hopscotch hash tables.
 .SH SYNOPSIS
-.B #include <hhash.h>
-.br
-.B #include <hhset.h>
-.br
-.B #include <hhmap.h>
-.br
+.ft L
+.nf
+#include <hhash.h>
+#include <hhset.h>
+#include <hhmap.h>
+.fi
 .PP
-.B typedef unsigned short ushort;
-.PP
-.B HHSet *hhmapnew(uint n, void *hash, void *cmp);
-.br
-.B int hhmapput(HHSet *S, ushort k, ushort v);
-.br
-.B ushort hhmapget(HHSet *S, ushort k);
-.br
-.B ushort hhmapdel(HHSet *S, ushort k);
-.br
+.ft L
+.nf
+typedef unsigned short ushort;
+HHSet *hhmapnew(uint n, void *hash, void *cmp);
+int hhmapput(HHSet *S, ushort k, ushort v);
+ushort hhmapget(HHSet *S, ushort k);
+ushort hhmapdel(HHSet *S, ushort k);
+.fi
 .SH DESCRIPTION
 This implements an associative map using the Hopscotch hash tables.
 The keys and values are limited to

@@ -6,7 +6,7 @@ MKSHELL=$PLAN9/bin/rc
 
 LIB=$PREFIX/lib/libhhash.a
 
-CFLAGS='-g -O0 -std=c99'
+CFLAGS='-std=c99'
 
 OFILES=\
 	hhash.$O\

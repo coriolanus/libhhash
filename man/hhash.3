@@ -3,37 +3,38 @@
 HHash, hashget, hashnew, hashfree, hashput, hashdel, hashsucc \-
 Hopscotch Hash Tables.
 .SH SYNOPSIS
-.B #include <hhash.h>
-.br
+.ft L
+.nf
+ #include <hhash.h>
+.fi
 .PP
-.B typedef struct HHash HHash;
+.ft L
+.nf
+.ta \w'\fL1234'u +\w'\fL1234'u
+typedef struct HHash
+{
+
+	uint *H;
+	uint *V;
+	uint k, m, n;
+};
+.fi
 .PP
-.B struct HHash
-.br
-.B {
-.br
-.B		uint *H;
-.br
-.B		uint *V;
-.br
-.B		uint k, m, n;
-.br
-.B };
+.ft L
+.nf
+#define hashget(hhash,h,i) \\
+	((hhash)->V[((h)+(i))%(hhash)->n])
+.fi
 .PP
-.B #define hashget(hhash,h,i) \\
-.br
-.B		((hhash)->V[((h)+(i))%(hhash)->n])
-.PP
-.B HHash *hhashnew(uint m);
-.br
-.B void hhashfree(HHash *T);
-.br
-.B int hhashsucc(HHash *T, uint h, uint i);
-.br
-.B int hhashput(HHash *T, uint h, uint x);
-.br
-.B void hhashdel(HHash *T, uint h, uint i);
-.br
+.nf
+.ft L
+.ta \w'\fL1234'u
+HHash *hhashnew(uint m);
+void hhashfree(HHash *T);
+int hhashsucc(HHash *T, uint h, uint i);
+int hhashput(HHash *T, uint h, uint x);
+void hhashdel(HHash *T, uint h, uint i);
+.fi
 .SH DESCRIPTION
 Hopscotch hash table provides a simple hash table implementation that
 resolves hash collisions with linear probing from the initial hash
@@ -166,21 +167,18 @@ if not
 .I hhashdel
 does nothing.
 .SH EXAMPLE
-.I 	uint n = 256;
-.br
-.I 	HHash *T = hhashnew(n);
-.br
-.I 	uint x = rand();
-.br
-.I 	uint h = x%n;
-.br
-.I 	hhashput(T,h,x);
-.br
-.I 	uint i = hhashsucc(T,h,0);
-.br
-.I 	uint y = hhashget(T,h,i);
-.br
-.I 	hhashfree(T);
+.nf
+.ft L
+.ta \w'\fL1234'u +\w'\fL1234'u
+uint n = 256;
+HHash *T = hhashnew(n);
+uint x = rand();
+uint h = x%n;
+hhashput(T,h,x);
+uint i = hhashsucc(T,h,0);
+uint y = hhashget(T,h,i);
+hhashfree(T);
+.fi
 .SH SEE ALSO
 hhset(3), hhmap(3)
 .SH REFERENCES

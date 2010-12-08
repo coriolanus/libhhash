@@ -3,37 +3,35 @@
 HHSet, hhsetnew, hhsetfree, hhsetcopy, hhsetput, hhsetget, hhsetdel \-
 Integer set using the Hopscotch hash tables.
 .SH SYNOPSIS
-.B #include <hhash.h>
-.br
-.B #include <hhset.h>
-.br
+.ft L
+.nf
+#include <hhash.h>
+#include <hhset.h>
+.fi
 .PP
-.B typedef struct HHSet HHSet;
+typedef struct HHSet HHSet;
 .PP
-.B struct HHSet
-.br
-.B {
-.br
-.B		HHash *T;
-.br
-.B		uint (*hash)(uint);
-.br
-.B		int (*cmp)(uint, uint);
-.br
-.B };
+.ft L
+.nf
+.ta \w'\fL1234'u +\w'\fL1234'u
+struct HHSet
+{
+	HHash *T;
+	uint (*hash)(uint);
+	int (*cmp)(uint, uint);
+};
+.fi
 .PP
-.B HHSet *hhsetnew(uint n, void *cmp, void *hash);
-.br
-.B void hhsetfree(HHSet *S);
-.br
-.B int hhsetcopy(HHSet *A, HHSet *B);
-.br
-.B int hhsetput(HHSet *S, uint x);
-.br
-.B uint hhsetget(HHSet *S, uint x);
-.br
-.B uint hhsetdel(HHSet *S, uint x);
-.br
+.nf
+.ft L
+.ta \w'\fL1234'u
+HHSet *hhsetnew(uint n, void *cmp, void *hash);
+void hhsetfree(HHSet *S);
+int hhsetcopy(HHSet *A, HHSet *B);
+int hhsetput(HHSet *S, uint x);
+uint hhsetget(HHSet *S, uint x);
+uint hhsetdel(HHSet *S, uint x);
+.fi
 .SH DESCRIPTION
 .I HHSet
 implements integer sets using the Hopscotch hash tables. The actual

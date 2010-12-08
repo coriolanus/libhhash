@@ -4,12 +4,6 @@
 #include <hhset.h>
 #include <hhmap.h>
 
-uint hash(uint x)
-{
-	uint k = (ushort)x;
-	return k*0x9e3779b1;
-}
-
 void
 fill(HHSet *S, uint m)
 {
@@ -25,7 +19,7 @@ main(void)
 {
 	uint n = 256;
 	uint m = 150;
-	HHSet *S = hhmapnew(n,hash,NULL);
+	HHSet *S = hhmapnew(n,NULL,NULL);
 	fill(S,m);
 	test(m == S->T->m);
 	hhsetfree(S);
