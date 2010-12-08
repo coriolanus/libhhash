@@ -1,0 +1,94 @@
+.TH HHSET 3
+.SH NAME
+HHSet, hhsetnew, hhsetfree, hhsetcopy, hhsetput, hhsetget, hhsetdel \-
+Integer set using the Hopscotch hash tables.
+.SH SYNOPSIS
+.B #include <hhash.h>
+.br
+.B #include <hhset.h>
+.br
+.PP
+.B typedef struct HHSet HHSet;
+.PP
+.B struct HHSet
+.br
+.B {
+.br
+.B		HHash *T;
+.br
+.B		uint (*hash)(uint);
+.br
+.B		int (*cmp)(uint, uint);
+.br
+.B };
+.PP
+.B HHSet *hhsetnew(uint n, void *cmp, void *hash);
+.br
+.B void hhsetfree(HHSet *S);
+.br
+.B int hhsetcopy(HHSet *A, HHSet *B);
+.br
+.B int hhsetput(HHSet *S, uint x);
+.br
+.B uint hhsetget(HHSet *S, uint x);
+.br
+.B uint hhsetdel(HHSet *S, uint x);
+.br
+.SH DESCRIPTION
+.I HHSet
+implements integer sets using the Hopscotch hash tables. The actual
+hash table is in the element
+.I T.
+.I Hash
+is a reference to a hash function, and
+.I cmp(x,y)
+is a comparison function which should return zero if
+.I x = y.
+.PP
+.I Hhsetnew(n,hash,cmp)
+creates a new hash table with initial size
+.I n,
+hash function
+.I hash
+and comparison function
+.I cmp.
+The memory allocated can be freed by
+.I hhsetfree.
+.PP
+.I Hhsetcopy(A,B)
+attempts to copy all the elements from
+.I A
+into
+.I B.
+If successful it will a return non-zero value and upon the first failure
+it will stop copying and returns zero.
+.PP
+.I Hhsetput(S,x)
+tries to insert
+.I x
+into the set
+.I S.
+If the underlying call to
+.I hhashput
+fails it will try to resize the table into twice larger. If this still fails
+it will return zero. Also,
+.I hhsetput(S,x)
+returns zero if
+.I x
+was already in the set, or
+.I x == 0.
+.PP
+.I y = hhsetget(S,x)
+returns the element
+.I y
+for which
+.I cmp(x,y) == 0.
+.I y = hhsetdel(S,x)
+removes
+.I x
+from the set and returns an element
+.I y
+for which
+.I cmp(x,y) == 0.
+.SH SEE ALSO
+hhash(3), hhmap(3)
