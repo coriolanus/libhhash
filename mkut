@@ -2,7 +2,7 @@
 
 MKSHELL=$PLAN9/bin/rc
 CFLAGS=-Wall -g -O0 -std=c99 -I$PREFIX/include
-LDFLAGS=-L$PREFIX/lib -lhhmap -lhhset -lhhash
+LDFLAGS=-L$PREFIX/lib -lhhash
 CFILES=`{ls *.c >[2] /dev/null}
 TARG=${CFILES:%.c=%}
 DIRS=`{ls -d */ >[2] /dev/null}

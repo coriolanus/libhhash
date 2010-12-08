@@ -6,23 +6,23 @@ MKSHELL=$PLAN9/bin/rc
 
 LIB=$PREFIX/lib/libhhash.a
 
-CFLAGS='-std=c99'
+CFLAGS='-g -O0 -std=c99'
 
 OFILES=\
 	hhash.$O\
-    hhset.$O\
-    hhmap.$O\
+	hhset.$O\
+	hhmap.$O\
 
 CFILES=\
 	hhash.c\
 	mach.c\
-    hhset.c\
-    hhmap.c\
+	hhset.c\
+	hhmap.c\
 
 HFILES=\
 	hhash.h\
-    hhset.h\
-    hhmap.h\
+	hhset.h\
+	hhmap.h\
 
 <$PLAN9/src/mklib
 
