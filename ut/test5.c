@@ -7,9 +7,9 @@ find(HHash *T, uint x)
 {
 	uint h = x%T->n;
 	int i = hhashsucc(T,h,0);
-	while (i >= 0) {
+	while(i >= 0){
 		uint y = hhashget(T,h,i);
-		if (x == y)
+		if(x == y)
 			return 1;
 		i = hhashsucc(T,h,i+1);
 	}

@@ -31,5 +31,7 @@ hhset.$O:	hhash.$O
 hhmap.$O:	hhset.$O
 
 install:QV:	$HFILES
+	if (! test -e $PREFIX/include/hash)
+		mkdir $PREFIX/include/hash
 	for (t in $HFILES)
-    	cp $t $PREFIX/include
+    	cp $t $PREFIX/include/hash

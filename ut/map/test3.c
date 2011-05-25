@@ -14,8 +14,9 @@ uint hash(uint x)
 void
 fill(HHSet *S, uint m)
 {
-	for (ushort i = 0; i < m; ++i) {
+	for(ushort i = 0; i < m; ++i){
 		ushort x = rand()%(USHRT_MAX-1)+1;
+		test(!hhmapget(S,i));
 		test(hhmapput(S,i,x));
 		test(hhmapget(S,i) == x);
 	}

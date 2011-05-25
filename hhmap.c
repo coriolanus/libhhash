@@ -31,7 +31,7 @@ hhmapnew(uint n, void *hash, void *cmp)
 int
 hhmapput(HHSet *S, ushort k, ushort v)
 {
-	if (v == 0)
+	if(v == 0)
 		return 0;
 	uint x = (((uint)v)<<HALF)|k;
 	return hhsetput(S,x);

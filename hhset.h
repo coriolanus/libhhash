@@ -10,11 +10,11 @@ struct HHSet
 	int (*cmp)(uint, uint);
 };
 
-HHSet *hhsetnew(uint, void*, void*);
+HHSet* hhsetnew(uint,void*,void*);
 void hhsetfree(HHSet*);
-int hhsetcopy(HHSet*, HHSet*);
-int hhsetput(HHSet*, uint);
-uint hhsetget(HHSet*, uint);
-uint hhsetdel(HHSet*, uint);
+int hhsetcopy(HHSet*,HHSet*);
+int hhsetput(HHSet*,uint);
+uint hhsetget(HHSet*,uint);
+uint hhsetdel(HHSet*,uint);
 
 #endif

@@ -7,7 +7,7 @@
 void
 fill(HHSet *S, uint m)
 {
-	for (ushort i = 0; i < m; ++i) {
+	for(ushort i = 0; i < m; ++i){
 		ushort x = rand();
 		test(hhmapput(S,x,i+1));
 		test(hhmapget(S,x) == i+1);

@@ -34,11 +34,11 @@ hhsetfree(HHSet *S)
 int
 hhsetcopy(HHSet *S, HHSet *T)
 {
-	for (int i = 0; i < S->T->n; ++i) {
+	for(int i = 0; i < S->T->n; ++i){
 		uint x = S->T->V[i];
-		if (x) {
+		if(x){
 			uint h = T->hash(x);
-			if (!hhashput(T->T,h,x))
+			if(!hhashput(T->T,h,x))
 				return 0;
 		}
 	}
@@ -49,10 +49,10 @@ static uint
 hunt(HHSet *S, uint h, uint k, int kill)
 {
 	int i = hhashsucc(S->T,h,0);
-	while (i >= 0) {
+	while(i >= 0){
 		uint x = hhashget(S->T,h,i);
-		if (S->cmp(k,x) == 0) {
-			if (kill)
+		if(S->cmp(k,x) == 0){
+			if(kill)
 				hhashdel(S->T,h,i);
 			return x;
 		}
@@ -77,7 +77,7 @@ static int
 resize(HHSet *R)
 {
 	HHSet *S = hhsetnew(2*R->T->n,R->hash,R->cmp);
-	if (!hhsetcopy(R,S)) {
+	if(!hhsetcopy(R,S)){
 		hhsetfree(S);
 		return 0;
 	}
@@ -91,14 +91,14 @@ resize(HHSet *R)
 int
 hhsetput(HHSet *S, uint x)
 {
-	if (x == 0)
+	if(x == 0)
 		return 0;
 	uint h = S->hash(x);
-	if (hunt(S,h,x,0))
+	if(hunt(S,h,x,0))
 		return 0;
-	if (hhashput(S->T,h,x))
+	if(hhashput(S->T,h,x))
 		return 1;
-	if (!resize(S))
+	if(!resize(S))
 		return 0;
 	return hhashput(S->T,h,x);
 }

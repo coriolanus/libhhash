@@ -6,15 +6,15 @@ typedef struct HHash HHash;
 
 struct HHash
 {
+	uint k,m,n;
 	uint *H;
 	uint *V;
-	uint k,m,n;
 };
 
 #define hhashget(hhash,x,i) \
 	((hhash)->V[((x)+(i))%(hhash)->n])
 
-HHash *hhashnew(uint);
+HHash* hhashnew(uint);
 void hhashfree(HHash*);
 int hhashput(HHash*,uint,uint);
 void hhashdel(HHash*,uint,uint);

@@ -9,9 +9,9 @@ main(void)
 	uint n = 16;
 	uint m = 0;
 	HHSet *S = hhsetnew(n,NULL,NULL);
-	for (uint i = 0; i < 30; ++i) {
+	for(uint i = 0; i < 30; ++i){
 		uint x = rand()+1;
-		if (!hhsetget(S,x)) {
+		if(!hhsetget(S,x)){
 			test(hhsetput(S,x));
 			++m;
 		}
