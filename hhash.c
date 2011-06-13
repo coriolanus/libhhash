@@ -111,9 +111,9 @@ hhashput(HHash *T, uint h, uint v)
 		uint z = seek(T,hd);
 		if (z == 0)
 			return 0;
+		uint j = z;
 		z = mod(T->n+hd-z,T->n);
 		uint i = succ(T,z,0);
-		uint j = mod(T->n+hd-z,T->n);
 		move(T,z,i,j);
 		d = mod(T->n+z+i-h,T->n);
 	}
