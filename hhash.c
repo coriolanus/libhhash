@@ -2,6 +2,9 @@
 #include "hhash.h"
 #include "mach.c"
 
+#define mod(x,n) \
+	((x) < (n) ? (x) : (x)-(n))
+
 HHash*
 hhashnew(uint n)
 {
@@ -35,31 +38,38 @@ next(HHash *T, uint h, int i)
 	return ffs(H);
 }
 
-int
-hhashsucc(HHash *T, uint h, uint i)
+static int
+succ(HHash *T, uint h, uint i)
 {
-	h %= T->n;
 	if(get(T->H[h],i))
 	    return i;
 	return next(T,h,i);
 }
 
+int
+hhashsucc(HHash *T, uint h, uint i)
+{
+	h %= T->n;
+	return succ(T,h,i);
+}
+
 static void
 move(HHash *T, uint h, uint i, uint j)
 {
-	h %= T->n;
 	unset(T->H[h],i);
 	set(T->H[h],j);
-	uint v = T->V[h+i];
-	T->V[h+i] = 0;
-	T->V[h+j] = v;
+	i = mod(h+i,T->n);
+	j = mod(h+j,T->n);
+	uint v = T->V[i];
+	T->V[i] = 0;
+	T->V[j] = v;
 }
 
 void
 hhashdel(HHash *T, uint h, uint i)
 {
 	h %= T->n;
-	uint j = (h+i)%T->n;
+	uint j = mod(h+i,T->n);
 	if(T->V[j] == 0 || !get(T->H[h],i))
 		return;
 	T->V[j] = 0;
@@ -70,18 +80,20 @@ hhashdel(HHash *T, uint h, uint i)
 static uint
 probe(HHash *T, uint h, uint i)
 {
-	for(;; ++i)
-		if(T->V[(h+i)%T->n] == 0)
+	for(; h+i < T->n; ++i)
+		if(T->V[h+i] == 0)
 			return i;
+	uint j = 0;
+	for(; T->V[j] != 0; ++j);
+	return i+j;
 }
 
 static uint
 seek(HHash *T, uint h)
 {
-	uint i = T->k-1;
-	for(; i > 0; --i){
-		uint hi = (T->n+h-i)%T->n;
-		if(T->H[hi] == 0 && ffs(T->H[hi]) < i)
+	for(uint i = T->k-1; i > 0; --i){
+		uint hi = mod(T->n+h-i,T->n);
+		if(T->H[hi] != 0 && ffs(T->H[hi]) < i)
 			return i;
 	}
 	return 0;
@@ -95,17 +107,17 @@ hhashput(HHash *T, uint h, uint v)
 	h %= T->n;
 	uint d = probe(T,h,0);
 	while(d >= T->k){
-		uint hd = (h+d)%T->n;
+		uint hd = mod(h+d,T->n);
 		uint z = seek(T,hd);
 		if (z == 0)
 			return 0;
-		z = (T->n+hd-z)%T->n;
-		uint i = hhashsucc(T,z,0);
-		uint j = (T->n+hd-z)%T->n;
+		z = mod(T->n+hd-z,T->n);
+		uint i = succ(T,z,0);
+		uint j = mod(T->n+hd-z,T->n);
 		move(T,z,i,j);
-		d = (T->n+z+i-h)%T->n;
+		d = mod(T->n+z+i-h,T->n);
 	}
-	uint hd = (h+d)%T->n;
+	uint hd = mod(h+d,T->n);
 	T->V[hd] = v;
 	set(T->H[h],d);
 	++T->m;

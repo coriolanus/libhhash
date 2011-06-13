@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <9unit.h>
-#include <hhash.h>
-#include <hhset.h>
-#include <hhmap.h>
+#include <hash/hhash.h>
+#include <hash/hhset.h>
+#include <hash/hhmap.h>
 
 uint hash(uint x)
 {

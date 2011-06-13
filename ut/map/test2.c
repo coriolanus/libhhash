@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <9unit.h>
-#include <hhash.h>
-#include <hhset.h>
-#include <hhmap.h>
+#include <hash/hhash.h>
+#include <hash/hhset.h>
+#include <hash/hhmap.h>
 
 void
 fill(HHSet *S, uint m)

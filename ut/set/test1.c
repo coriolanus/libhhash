@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <9unit.h>
-#include <hhash.h>
-#include <hhset.h>
+#include <hash/hhash.h>
+#include <hash/hhset.h>
 
 static uint
 fill(HHSet *S)

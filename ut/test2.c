@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <9unit.h>
-#include <hhash.h>
+#include <hash/hhash.h>
 
 int
 main(void)

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <9unit.h>
-#include <hhash.h>
+#include <hash/hhash.h>
 
 int
 main(void)
@@ -18,6 +18,8 @@ main(void)
 	x = 14;
 	test(hhashput(T,x,1));
 	test(hhashsucc(T,x,0) == 0);
+	test(hhashput(T,x,1));
+	test(hhashsucc(T,x,1) == 1);
 	test(!hhashput(T,x,1));
 	hhashfree(T);
 	return 0;
