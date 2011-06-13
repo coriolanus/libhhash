@@ -50,10 +50,9 @@ move(HHash *T, uint h, uint i, uint j)
 	h %= T->n;
 	unset(T->H[h],i);
 	set(T->H[h],j);
-	uint hi = (h+i)%T->n;
-	uint v = T->V[hi];
-	T->V[hi] = 0;
-	T->V[(h+j)%T->n] = v;
+	uint v = T->V[h+i];
+	T->V[h+i] = 0;
+	T->V[h+j] = v;
 }
 
 void
