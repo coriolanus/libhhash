@@ -78,8 +78,9 @@ hhashdel(HHash *T, uint h, uint i)
 }
 
 static uint
-probe(HHash *T, uint h, uint i)
+probe(HHash *T, uint h)
 {
+	int i = 0;
 	for(; h+i < T->n; ++i)
 		if(T->V[h+i] == 0)
 			return i;
@@ -105,7 +106,7 @@ hhashput(HHash *T, uint h, uint v)
 	if(T->m == T->n || v == 0)
 		return 0;
 	h %= T->n;
-	uint d = probe(T,h,0);
+	uint d = probe(T,h);
 	while(d >= T->k){
 		uint hd = mod(h+d,T->n);
 		uint z = seek(T,hd);
