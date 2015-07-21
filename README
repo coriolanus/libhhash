@@ -2,20 +2,20 @@ HOPSCOTCH HASH TABLE IMPLMENTATION
 
 Hash tables are very efficient for key value lookup in both speed and
 memory usage. Hopscotch hash tables also provide memory locality and
-cache efficiency by using open addressing and a special methdod of
+cache efficiency by using open addressing and a special method of
 linear probing.
 
 
 IMPLEMENTATION NOTES
 
-The neighbourhood of baskets is circular going back after the last
-element to the first using modulo arithmetics. Whereever we use a
+The neighborhood of baskets is circular going back after the last
+element to the first using modulo arithmetic's. Wherever we use a
 difference (x-y)%n, in order to keep modulo semantics using unsigned
 variables we add n: (n+x-y)%n, which is basically a nop but guarantees
 that the result of the subtraction remains positive.
 
 We are using the following GCC builtin function to calculate an integer
-logartihm in base 2:
+logarithm in base 2:
 
 __builtin_clz, count-leading-zeros, returns the number of leading
 0-bits in x, starting at the most significant bit position. If x is 0,
