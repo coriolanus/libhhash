@@ -3,48 +3,26 @@
 #include "hhset.h"
 #include "hhmap.h"
 
-#define HALF \
-	(8*sizeof(ushort))
+#define HALF (8 * sizeof(ushort))
 
-static uint
-id(uint x)
-{
-	return (ushort)x;
+static uint id(uint x) { return (ushort)x; }
+
+static int neq(uint x, uint y) { return (ushort)x != (ushort)y; }
+
+HHSet *hhmapnew(uint n, uint (*hash)(uint), int (*cmp)(uint, uint)) {
+  HHSet *S = malloc(sizeof(HHSet));
+  S->T = hhashnew(n);
+  S->hash = (hash != NULL) ? hash : id;
+  S->cmp = (cmp != NULL) ? cmp : neq;
+  return S;
 }
 
-static int
-neq(uint x, uint y)
-{
-	return (ushort)x != (ushort)y;
+int hhmapput(HHSet *S, ushort k, ushort v) {
+  if (v == 0) return 0;
+  uint x = (((uint)v) << HALF) | k;
+  return hhsetput(S, x);
 }
 
-HHSet *
-hhmapnew(uint n, void *hash, void *cmp)
-{
-	HHSet *S = malloc(sizeof(HHSet));
-	S->T = hhashnew(n);
-	S->hash = (hash != NULL) ? hash : id;
-	S->cmp = (cmp != NULL) ? cmp : neq;
-	return S;
-}
+ushort hhmapget(HHSet *S, ushort k) { return (ushort)(hhsetget(S, k) >> HALF); }
 
-int
-hhmapput(HHSet *S, ushort k, ushort v)
-{
-	if(v == 0)
-		return 0;
-	uint x = (((uint)v)<<HALF)|k;
-	return hhsetput(S,x);
-}
-
-ushort
-hhmapget(HHSet *S, ushort k)
-{
-	return (ushort)(hhsetget(S,k)>>HALF);
-}
-
-ushort
-hhmapdel(HHSet *S, ushort k)
-{
-	return (ushort)(hhsetdel(S,k)>>HALF);
-}
+ushort hhmapdel(HHSet *S, ushort k) { return (ushort)(hhsetdel(S, k) >> HALF); }

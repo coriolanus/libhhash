@@ -6,7 +6,7 @@ cache efficiency by using open addressing and a special methdod of
 linear probing.
 
 
-IMPLEMENTATIOON NOTES
+IMPLEMENTATION NOTES
 
 The neighbourhood of baskets is circular going back after the last
 element to the first using modulo arithmetics. Whereever we use a
@@ -25,14 +25,7 @@ the result is undefined.
 BUILDING
 
 The code relies, besides the aforementioned builtins, on stdlib.h for the
-function malloc. The provided mkfile is written for Plan 9 mk which is
-provided on other platforms by the Plan 9 Ports [2]. If Plan9port is
-available to get the library compiled and, optionally installed, use
-'mk [install]'.
-
-The environment variables needed to install are in mkconfig, which is
-a Plan 9 RC script. The variable BASE referes to the base directory of
-this library. If you use BASH shell, you can use mkconfig.sh instead.
+function malloc. 
 
 
 TESTING

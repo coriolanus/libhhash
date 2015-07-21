@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <9unit.h>
-#include <hash/hhash.h>
+#include <hhash.h>
+#include "test.h"
 
 uint
 fill(HHash *T)
