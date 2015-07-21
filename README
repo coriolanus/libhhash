@@ -30,9 +30,9 @@ function malloc.
 
 TESTING
 
-Unit tests can be found from the directory ut. The associated mkfile
+Unit tests can be found from the directory test. The associated makefile
 is contained within as is the documentation of them. The header
-9unit.h is our entire unit test library and is included here. The
+test.h is our entire unit test library and is included here. The
 script check runs executables and prints either "pass" or "FAIL" with
 obvious semantics depending on the return value of the executed test.
 
