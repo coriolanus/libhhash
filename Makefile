@@ -20,12 +20,13 @@ $(OFILES): $(CFILES) $(HFILES)
 
 CFLAGS+=-std=c99 -O3
 
-phony: format
+.PHONY: format
 format: $(CFILES) $(HFILES)
 	clang-format -i $^
 
 libhhash.a: $(OFILES)
 	ar rcs $@ $^
 
+.PHONY: clean
 clean:
 	rm -f $(OFILES) libhhash.a
