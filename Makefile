@@ -14,7 +14,7 @@ HFILES=\
 	hhset.h\
 	hhmap.h\
 
-default: $(OFILES)
+default: $(OFILES) libhhash.a
 
 $(OFILES): $(CFILES) $(HFILES)
 
