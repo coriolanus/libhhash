@@ -26,7 +26,7 @@ CFLAGS+=-std=c99 -O3
 
 .PHONY: format
 format: $(CFILES) $(HFILES)
-	clang-format -i $^
+	clang-format -style=Google -i $^
 
 libhhash.a: $(OFILES)
 	ar rcs $@ $^
