@@ -14,6 +14,10 @@ HFILES=\
 	hhset.h\
 	hhmap.h\
 
+TESTC=${shell find test -name "*.c"}
+
+TESTS=${TESTC:%.c=%}
+
 default: $(OFILES) libhhash.a
 
 $(OFILES): $(CFILES) $(HFILES)
@@ -29,4 +33,13 @@ libhhash.a: $(OFILES)
 
 .PHONY: clean
 clean:
-	rm -f $(OFILES) libhhash.a
+	rm -f $(OFILES) libhhash.a $(TESTS)
+
+$(TESTS): $(TESTC) $(CFILES) $(HFILES)
+	cc -L. -lhhash $(CFLAGS) -I. -Itest -o $@ $@.c
+
+test: $(TESTS)
+	for f in $(TESTS); \
+	do \
+	  echo $$f; \
+	done;

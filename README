@@ -30,11 +30,9 @@ function malloc.
 
 TESTING
 
-Unit tests can be found from the directory test. The associated makefile
-is contained within as is the documentation of them. The header
-test.h is our entire unit test library and is included here. The
-script check runs executables and prints either "pass" or "FAIL" with
-obvious semantics depending on the return value of the executed test.
+Unit tests can be found from the directory test. To run them use 'make test'
+target. The tests do not print anything but abort if something has not been as
+it should.
 
 
 DOCUMENTATION
