@@ -2,19 +2,19 @@
 #include <hhash.h>
 #include "test.h"
 
-uint fill(HHash *T) {
-  uint m = 0;
-  for (uint i = 0; i < 100; ++i) {
-    uint x = rand() % T->n;
+ulong fill(HHash *T) {
+  ulong m = 0;
+  for (ulong i = 0; i < 100; ++i) {
+    ulong x = rand() % T->n;
     if (hhashsucc(T, x, 0) < 0)
       if (hhashput(T, x, x)) ++m;
   }
   return m;
 }
 
-uint count(HHash *T) {
-  uint m = 0;
-  uint h = 0;
+ulong count(HHash *T) {
+  ulong m = 0;
+  ulong h = 0;
   while (h < T->n) {
     int i = hhashsucc(T, h, 0);
     while (i >= 0) {
@@ -27,9 +27,9 @@ uint count(HHash *T) {
 }
 
 int main(void) {
-  uint n = 256;
+  ulong n = 256;
   HHash *T = hhashnew(n);
-  uint m = fill(T);
+  ulong m = fill(T);
   test(m == T->m);
   test(m == count(T));
   hhashfree(T);

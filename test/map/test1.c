@@ -5,7 +5,7 @@
 #include "test.h"
 
 int main(void) {
-  uint n = 256;
+  ulong n = 256;
   HHSet *S = hhmapnew(n, NULL, NULL);
   test(hhmapput(S, 5, 15));
   test(hhmapget(S, 5) == 15);

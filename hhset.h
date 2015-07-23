@@ -5,15 +5,15 @@ typedef struct HHSet HHSet;
 
 struct HHSet {
   HHash* T;
-  uint (*hash)(uint);
-  int (*cmp)(uint, uint);
+  ulong (*hash)(ulong);
+  int (*cmp)(ulong, ulong);
 };
 
-HHSet* hhsetnew(uint, uint (*)(uint), int (*)(uint, uint));
+HHSet* hhsetnew(ulong, ulong (*)(ulong), int (*)(ulong, ulong));
 void hhsetfree(HHSet*);
 int hhsetcopy(HHSet*, HHSet*);
-int hhsetput(HHSet*, uint);
-uint hhsetget(HHSet*, uint);
-uint hhsetdel(HHSet*, uint);
+int hhsetput(HHSet*, ulong);
+ulong hhsetget(HHSet*, ulong);
+ulong hhsetdel(HHSet*, ulong);
 
 #endif

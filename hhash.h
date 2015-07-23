@@ -1,21 +1,21 @@
 #ifndef LIBHHASH_H
 #define LIBHHASH_H
 
-typedef unsigned int uint;
+typedef unsigned long ulong;
 typedef struct HHash HHash;
 
 struct HHash {
-  uint k, m, n;
-  uint *H;
-  uint *V;
+  ulong k, m, n;
+  ulong *H;
+  ulong *V;
 };
 
 #define hhashget(hhash, x, i) ((hhash)->V[((x) + (i)) % (hhash)->n])
 
-HHash *hhashnew(uint);
+HHash *hhashnew(ulong);
 void hhashfree(HHash *);
-int hhashput(HHash *, uint, uint);
-void hhashdel(HHash *, uint, uint);
-int hhashsucc(HHash *, uint, uint);
+int hhashput(HHash *, ulong, ulong);
+void hhashdel(HHash *, ulong, ulong);
+int hhashsucc(HHash *, ulong, ulong);
 
 #endif

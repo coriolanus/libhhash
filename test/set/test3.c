@@ -5,10 +5,10 @@
 
 int x;
 
-static uint fill(HHSet *S) {
-  uint m = 0;
-  for (uint i = 0; i < 128; ++i) {
-    uint y = rand() + 1;
+static ulong fill(HHSet *S) {
+  ulong m = 0;
+  for (ulong i = 0; i < 128; ++i) {
+    ulong y = rand() + 1;
     if (!hhsetget(S, y)) {
       test(hhsetput(S, y));
       ++m;
@@ -19,7 +19,7 @@ static uint fill(HHSet *S) {
 }
 
 int main(void) {
-  uint n = 256;
+  ulong n = 256;
   srand(13948824);
   HHSet *S = hhsetnew(n, NULL, NULL);
   x = rand();

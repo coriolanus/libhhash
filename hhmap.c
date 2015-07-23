@@ -3,13 +3,13 @@
 #include "hhset.h"
 #include "hhmap.h"
 
-#define HALF (8 * sizeof(ushort))
+#define HALF (8 * sizeof(uint))
 
-static uint id(uint x) { return (ushort)x; }
+static ulong id(ulong x) { return (uint)x; }
 
-static int neq(uint x, uint y) { return (ushort)x != (ushort)y; }
+static int neq(ulong x, ulong y) { return (uint)x != (uint)y; }
 
-HHSet *hhmapnew(uint n, uint (*hash)(uint), int (*cmp)(uint, uint)) {
+HHSet *hhmapnew(ulong n, ulong (*hash)(ulong), int (*cmp)(ulong, ulong)) {
   HHSet *S = malloc(sizeof(HHSet));
   S->T = hhashnew(n);
   S->hash = (hash != NULL) ? hash : id;
@@ -17,12 +17,12 @@ HHSet *hhmapnew(uint n, uint (*hash)(uint), int (*cmp)(uint, uint)) {
   return S;
 }
 
-int hhmapput(HHSet *S, ushort k, ushort v) {
+int hhmapput(HHSet *S, uint k, uint v) {
   if (v == 0) return 0;
-  uint x = (((uint)v) << HALF) | k;
+  ulong x = (((ulong)v) << HALF) | k;
   return hhsetput(S, x);
 }
 
-ushort hhmapget(HHSet *S, ushort k) { return (ushort)(hhsetget(S, k) >> HALF); }
+uint hhmapget(HHSet *S, uint k) { return (uint)(hhsetget(S, k) >> HALF); }
 
-ushort hhmapdel(HHSet *S, ushort k) { return (ushort)(hhsetdel(S, k) >> HALF); }
+uint hhmapdel(HHSet *S, uint k) { return (uint)(hhsetdel(S, k) >> HALF); }

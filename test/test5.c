@@ -2,11 +2,11 @@
 #include <hhash.h>
 #include "test.h"
 
-int find(HHash *T, uint x) {
-  uint h = x % T->n;
+int find(HHash *T, ulong x) {
+  ulong h = x % T->n;
   int i = hhashsucc(T, h, 0);
   while (i >= 0) {
-    uint y = hhashget(T, h, i);
+    ulong y = hhashget(T, h, i);
     if (x == y) return 1;
     i = hhashsucc(T, h, i + 1);
   }
@@ -14,7 +14,7 @@ int find(HHash *T, uint x) {
 }
 
 int main(void) {
-  uint n = 256;
+  ulong n = 256;
   HHash *T = hhashnew(n);
   test(hhashput(T, 0x04, 0x04));
   test(hhashput(T, 0x09, 0x09));

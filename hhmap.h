@@ -1,11 +1,11 @@
 #ifndef LIBHHMAP_H
 #define LIBHHMAP_H
 
-typedef unsigned short ushort;
+typedef unsigned int uint;
 
-HHSet *hhmapnew(uint n, uint (*)(uint), int (*)(uint, uint));
-int hhmapput(HHSet *, ushort, ushort);
-ushort hhmapget(HHSet *, ushort);
-ushort hhmapdel(HHSet *, ushort);
+HHSet *hhmapnew(ulong n, ulong (*)(ulong), int (*)(ulong, ulong));
+int hhmapput(HHSet *, uint, uint);
+uint hhmapget(HHSet *, uint);
+uint hhmapdel(HHSet *, uint);
 
 #endif

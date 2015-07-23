@@ -4,11 +4,11 @@
 #include "test.h"
 
 int main(void) {
-  uint n = 16;
-  uint m = 0;
+  ulong n = 16;
+  ulong m = 0;
   HHSet *S = hhsetnew(n, NULL, NULL);
-  for (uint i = 0; i < 30; ++i) {
-    uint x = rand() + 1;
+  for (ulong i = 0; i < 30; ++i) {
+    ulong x = rand() + 1;
     if (!hhsetget(S, x)) {
       test(hhsetput(S, x));
       ++m;

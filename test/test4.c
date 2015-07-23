@@ -3,9 +3,9 @@
 #include "test.h"
 
 int main(void) {
-  uint n = 16;
+  ulong n = 16;
   HHash *T = hhashnew(n);
-  uint x = 15;
+  ulong x = 15;
   test(hhashput(T, x, 1));
   test(hhashsucc(T, x, 0) == 0);
   test(hhashput(T, x, 1));

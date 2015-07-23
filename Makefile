@@ -35,9 +35,10 @@ libhhash.a: $(OFILES)
 clean:
 	rm -f $(OFILES) libhhash.a $(TESTS)
 
-$(TESTS): $(TESTC) $(CFILES) $(HFILES)
+$(TESTS): $(TESTC) $(CFILES) $(HFILES) libhhash.a
 	cc -L. -lhhash $(CFLAGS) -I. -Itest -o $@ $@.c
 
+.PHONY: test
 test: $(TESTS)
 	for f in $(TESTS); \
 	do \

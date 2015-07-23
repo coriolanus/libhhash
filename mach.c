@@ -1,4 +1,4 @@
-#define WORD sizeof(uint) * 8
+#define WORD (8 * sizeof(ulong))
 
 #define clz(x) __builtin_clz(x)
 
