@@ -40,7 +40,8 @@ $(TESTS): $(TESTC) $(CFILES) $(HFILES) libhhash.a
 
 .PHONY: test
 test: $(TESTS)
-	for f in $(TESTS); \
+	@for f in $(TESTS); \
 	do \
-	  echo $$f; \
+		echo $$f; \
+		./$$f; \
 	done;

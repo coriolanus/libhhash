@@ -63,7 +63,7 @@ static int resize(HHSet *R) {
 int hhsetput(HHSet *S, ulong x) {
   if (x == 0) return 0;
   ulong h = S->hash(x);
-  if (hunt(S, h, x, 0)) return 0;
+  if (hunt(S, h, x, 0)) return 1;
   if (hhashput(S->T, h, x)) return 1;
   if (!resize(S)) return 0;
   return hhashput(S->T, h, x);

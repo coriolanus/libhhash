@@ -12,11 +12,11 @@ Integer associative arrays using the Hopscotch hash tables.
 .PP
 .ft L
 .nf
-typedef unsigned short ushort;
-HHSet *hhmapnew(uint n, void *hash, void *cmp);
-int hhmapput(HHSet *S, ushort k, ushort v);
-ushort hhmapget(HHSet *S, ushort k);
-ushort hhmapdel(HHSet *S, ushort k);
+typedef unsigned short uint;
+HHSet *hhmapnew(ulong n, void *hash, void *cmp);
+int hhmapput(HHSet *S, uint k, uint v);
+uint hhmapget(HHSet *S, uint k);
+uint hhmapdel(HHSet *S, uint k);
 .fi
 .SH DESCRIPTION
 This implements an associative map using the Hopscotch hash tables.
@@ -49,7 +49,7 @@ the default function is identity of the first 16 bits. If the
 comparison function is
 .I NULL
 the default is
-. I (ushort)x != (ushort)y.
+. I (uint)x != (uint)y.
 .PP
 .I Hhmapput(S,k,v)
 tries to insert the value

@@ -14,9 +14,9 @@ Hopscotch Hash Tables.
 typedef struct HHash
 {
 
-	uint *H;
-	uint *V;
-	uint k, m, n;
+	ulong *H;
+	ulong *V;
+	ulong k, m, n;
 };
 .fi
 .PP
@@ -29,11 +29,11 @@ typedef struct HHash
 .nf
 .ft L
 .ta \w'\fL1234'u
-HHash *hhashnew(uint m);
+HHash *hhashnew(ulong m);
 void hhashfree(HHash *T);
-int hhashsucc(HHash *T, uint h, uint i);
-int hhashput(HHash *T, uint h, uint x);
-void hhashdel(HHash *T, uint h, uint i);
+int hhashsucc(HHash *T, ulong h, ulong i);
+int hhashput(HHash *T, ulong h, ulong x);
+void hhashdel(HHash *T, ulong h, ulong i);
 .fi
 .SH DESCRIPTION
 Hopscotch hash table provides a simple hash table implementation that
@@ -49,7 +49,7 @@ elements before insertion. The functions always treats the hash values
 .I modulo T->n.
 .PP
 These hash tables are useful when the values to be stored fit in
-.I uint.
+.I ulong.
 With larger entries you are better off using normal hash tables with
 linked list buckets, which is then fast enough and simpler to implement.
 With integer entries these tables have the following advantages:
@@ -170,13 +170,13 @@ does nothing.
 .nf
 .ft L
 .ta \w'\fL1234'u +\w'\fL1234'u
-uint n = 256;
+ulong n = 256;
 HHash *T = hhashnew(n);
-uint x = rand();
-uint h = x%n;
+ulong x = rand();
+ulong h = x%n;
 hhashput(T,h,x);
-uint i = hhashsucc(T,h,0);
-uint y = hhashget(T,h,i);
+ulong i = hhashsucc(T,h,0);
+ulong y = hhashget(T,h,i);
 hhashfree(T);
 .fi
 .SH SEE ALSO

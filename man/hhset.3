@@ -17,20 +17,20 @@ typedef struct HHSet HHSet;
 struct HHSet
 {
 	HHash *T;
-	uint (*hash)(uint);
-	int (*cmp)(uint, uint);
+	ulong (*hash)(ulong);
+	int (*cmp)(ulong, ulong);
 };
 .fi
 .PP
 .nf
 .ft L
 .ta \w'\fL1234'u
-HHSet *hhsetnew(uint n, void *cmp, void *hash);
+HHSet *hhsetnew(ulong n, void *cmp, void *hash);
 void hhsetfree(HHSet *S);
 int hhsetcopy(HHSet *A, HHSet *B);
-int hhsetput(HHSet *S, uint x);
-uint hhsetget(HHSet *S, uint x);
-uint hhsetdel(HHSet *S, uint x);
+int hhsetput(HHSet *S, ulong x);
+ulong hhsetget(HHSet *S, ulong x);
+ulong hhsetdel(HHSet *S, ulong x);
 .fi
 .SH DESCRIPTION
 .I HHSet
