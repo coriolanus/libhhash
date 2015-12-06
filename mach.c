@@ -6,8 +6,8 @@
 
 #define ffs(x) (__builtin_ctzl(x))
 
-#define get(x, i) ((x) & (1 << (i)))
+#define get(x, i) ((x) & (1L << (i)))
 
-#define set(x, i) (x = (x) | (1 << (i)))
+#define set(x, i) (x = (x) | (1L << (i)))
 
-#define unset(x, i) (x = (x) & ~(1 << (i)))
+#define unset(x, i) (x = (x) & ~(1L << (i)))
